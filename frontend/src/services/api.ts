@@ -5,6 +5,7 @@ const API_BASE_URL = "https://productivity-os.onrender.com";
 const api = axios.create({
   baseURL: API_BASE_URL,
   timeout: 10000,
+  withCredentials: true, // Ensure cookies (if any) are sent
 });
 
 // Request interceptor to add auth token
@@ -31,88 +32,88 @@ api.interceptors.response.use(
   }
 );
 
-// Auth API
+// ✅ Auth API
 export const authAPI = {
   login: (email: string, password: string) => 
-    api.post('/auth/login', { email, password }),
+    api.post('/api/auth/login', { email, password }),
   register: (name: string, email: string, password: string) => 
-    api.post('/auth/register', { name, email, password }),
+    api.post('/api/auth/register', { name, email, password }),
   getMe: () => 
-    api.get('/auth/me'),
+    api.get('/api/auth/me'),
   updatePreferences: (preferences: any) => 
-    api.put('/auth/preferences', preferences),
+    api.put('/api/auth/preferences', preferences),
 };
 
-// Tasks API
+// ✅ Tasks API
 export const tasksAPI = {
   getTasks: (params?: any) => 
-    api.get('/tasks', { params }),
+    api.get('/api/tasks', { params }),
   getTask: (id: string) => 
-    api.get(`/tasks/${id}`),
+    api.get(`/api/tasks/${id}`),
   createTask: (task: any) => 
-    api.post('/tasks', task),
+    api.post('/api/tasks', task),
   updateTask: (id: string, task: any) => 
-    api.put(`/tasks/${id}`, task),
+    api.put(`/api/tasks/${id}`, task),
   deleteTask: (id: string) => 
-    api.delete(`/tasks/${id}`),
+    api.delete(`/api/tasks/${id}`),
 };
 
-// Habits API
+// ✅ Habits API
 export const habitsAPI = {
   getHabits: (params?: any) => 
-    api.get('/habits', { params }),
+    api.get('/api/habits', { params }),
   getHabit: (id: string) => 
-    api.get(`/habits/${id}`),
+    api.get(`/api/habits/${id}`),
   createHabit: (habit: any) => 
-    api.post('/habits', habit),
+    api.post('/api/habits', habit),
   updateHabit: (id: string, habit: any) => 
-    api.put(`/habits/${id}`, habit),
+    api.put(`/api/habits/${id}`, habit),
   deleteHabit: (id: string) => 
-    api.delete(`/habits/${id}`),
+    api.delete(`/api/habits/${id}`),
   completeHabit: (id: string, date?: string) => 
-    api.post(`/habits/${id}/complete`, { date }),
+    api.post(`/api/habits/${id}/complete`, { date }),
   incompleteHabit: (id: string, date?: string) => 
-    api.post(`/habits/${id}/incomplete`, { date }),
+    api.post(`/api/habits/${id}/incomplete`, { date }),
 };
 
-// Focus API
+// ✅ Focus API
 export const focusAPI = {
   getSessions: (params?: any) => 
-    api.get('/focus', { params }),
+    api.get('/api/focus', { params }),
   getStats: () => 
-    api.get('/focus/stats'),
+    api.get('/api/focus/stats'),
   createSession: (session: any) => 
-    api.post('/focus', session),
+    api.post('/api/focus', session),
   updateSession: (id: string, session: any) => 
-    api.put(`/focus/${id}`, session),
+    api.put(`/api/focus/${id}`, session),
   completeSession: (id: string, notes?: string) => 
-    api.put(`/focus/${id}/complete`, { notes }),
+    api.put(`/api/focus/${id}/complete`, { notes }),
   deleteSession: (id: string) => 
-    api.delete(`/focus/${id}`),
+    api.delete(`/api/focus/${id}`),
 };
 
-// Notes API
+// ✅ Notes API
 export const notesAPI = {
   getNotes: (params?: any) => 
-    api.get('/notes', { params }),
+    api.get('/api/notes', { params }),
   getNote: (id: string) => 
-    api.get(`/notes/${id}`),
+    api.get(`/api/notes/${id}`),
   createNote: (note: any) => 
-    api.post('/notes', note),
+    api.post('/api/notes', note),
   updateNote: (id: string, note: any) => 
-    api.put(`/notes/${id}`, note),
+    api.put(`/api/notes/${id}`, note),
   deleteNote: (id: string) => 
-    api.delete(`/notes/${id}`),
+    api.delete(`/api/notes/${id}`),
   getTags: () => 
-    api.get('/notes/tags/all'),
+    api.get('/api/notes/tags/all'),
 };
 
-// Dashboard API
+// ✅ Dashboard API
 export const dashboardAPI = {
   getStats: () => 
-    api.get('/dashboard/stats'),
+    api.get('/api/dashboard/stats'),
   getAnalytics: (period?: string) => 
-    api.get('/dashboard/analytics', { params: { period } }),
+    api.get('/api/dashboard/analytics', { params: { period } }),
 };
 
 export default api;
