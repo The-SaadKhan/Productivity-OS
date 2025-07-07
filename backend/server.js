@@ -30,7 +30,7 @@ const allowedOrigins = [
 ].filter(Boolean); // removes undefined
 
 app.use(
-  cors({
+  3({
     origin: function (origin, callback) {
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);

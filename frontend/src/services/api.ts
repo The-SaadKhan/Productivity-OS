@@ -1,12 +1,13 @@
 import axios from 'axios';
 
-const API_BASE_URL = "https://productivity-os.onrender.com";
+const API_BASE_URL = import.meta.env.VITE_API_URL;
 
 const api = axios.create({
   baseURL: API_BASE_URL,
   timeout: 10000,
-  withCredentials: true, // Ensure cookies (if any) are sent
+  withCredentials: true, // ✅ if you're using cookies or want secure cross-origin requests
 });
+
 
 // Request interceptor to add auth token
 api.interceptors.request.use(
