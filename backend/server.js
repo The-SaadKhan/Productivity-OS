@@ -20,15 +20,29 @@ const PORT = process.env.PORT || 5000;
 
 // Security middleware
 app.use(helmet());
+
+// ✅ Updated CORS setup
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://productivity-os.vercel.app',
+  process.env.CLIENT_URL
+].filter(Boolean); // removes undefined/null
+
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:5173',
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true
 }));
 
 // Rate limiting
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // limit each IP to 100 requests per windowMs
+  max: 100,
   message: 'Too many requests from this IP, please try again later.'
 });
 app.use('/api/', limiter);
@@ -62,7 +76,7 @@ app.use('/api/focus', focusRoutes);
 app.use('/api/notes', noteRoutes);
 app.use('/api/dashboard', dashboardRoutes);
 
-// Health check endpoint
+// Health check
 app.get('/api/health', (req, res) => {
   res.json({ message: 'Server is running!', timestamp: new Date() });
 });
@@ -76,7 +90,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-// 404 handler
+// 404 fallback
 app.use('*', (req, res) => {
   res.status(404).json({ message: 'Route not found' });
 });
