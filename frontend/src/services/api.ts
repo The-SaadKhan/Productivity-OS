@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api/route';
+const API_BASE_URL = "https://productivity-os.onrender.com";
 
 const api = axios.create({
   baseURL: API_BASE_URL,
