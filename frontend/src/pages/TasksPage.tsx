@@ -113,20 +113,21 @@ export const TasksPage: React.FC = () => {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">
           Tasks
         </h1>
         <button
           onClick={() => setShowForm(true)}
-          className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
+          className="inline-flex items-center px-3 sm:px-4 py-2 border border-transparent text-xs sm:text-sm font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
         >
           <Plus className="w-4 h-4 mr-2" />
-          Add Task
+          <span className="hidden sm:inline">Add Task</span>
+          <span className="sm:hidden">Add</span>
         </button>
       </div>
 
       {/* Filters */}
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-1 sm:gap-2">
         {filterOptions.map(option => {
           const Icon = option.icon;
           const count = taskCounts[option.value as keyof typeof taskCounts];
@@ -135,15 +136,16 @@ export const TasksPage: React.FC = () => {
             <button
               key={option.value}
               onClick={() => setFilter(option.value as any)}
-              className={`inline-flex items-center px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+              className={`inline-flex items-center px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors ${
                 filter === option.value
                   ? 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700'
               }`}
             >
-              {Icon && <Icon className="w-4 h-4 mr-1" />}
-              {option.label}
-              <span className="ml-2 px-2 py-1 text-xs bg-gray-200 dark:bg-gray-700 rounded-full">
+              {Icon && <Icon className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />}
+              <span className="hidden sm:inline">{option.label}</span>
+              <span className="sm:hidden">{option.label.split(' ')[0]}</span>
+              <span className="ml-1 sm:ml-2 px-1.5 sm:px-2 py-0.5 sm:py-1 text-xs bg-gray-200 dark:bg-gray-700 rounded-full">
                 {count}
               </span>
             </button>

@@ -141,61 +141,61 @@ export const FocusPage: React.FC = () => {
   return (
     <div className="space-y-6">
       <div className="text-center">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-2">
           Focus Timer
         </h1>
-        <p className="text-gray-600 dark:text-gray-400">
+        <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 px-4">
           Stay focused and productive with customizable timer sessions
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
         {/* Timer Section */}
         <div className="lg:col-span-2">
-          <div className="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-sm text-center">
+          <div className="bg-white dark:bg-gray-800 rounded-xl p-4 sm:p-8 shadow-sm text-center">
             {/* Session Type Toggle */}
-            <div className="mb-6">
-              <div className="flex justify-center space-x-2 mb-4">
+            <div className="mb-4 sm:mb-6">
+              <div className="flex flex-col sm:flex-row justify-center space-y-2 sm:space-y-0 sm:space-x-2 mb-4">
                 <button
                   onClick={() => setSessionType('focus')}
-                  className={`px-6 py-3 rounded-lg text-sm font-medium transition-colors ${
+                  className={`px-4 sm:px-6 py-2 sm:py-3 rounded-lg text-xs sm:text-sm font-medium transition-colors ${
                     sessionType === 'focus'
                       ? 'bg-blue-600 text-white'
                       : 'bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'
                   }`}
                   disabled={isRunning}
                 >
-                  <Clock className="w-4 h-4 inline mr-2" />
+                  <Clock className="w-3 h-3 sm:w-4 sm:h-4 inline mr-1 sm:mr-2" />
                   Focus ({focusDuration} min)
                 </button>
                 <button
                   onClick={() => setSessionType('break')}
-                  className={`px-6 py-3 rounded-lg text-sm font-medium transition-colors ${
+                  className={`px-4 sm:px-6 py-2 sm:py-3 rounded-lg text-xs sm:text-sm font-medium transition-colors ${
                     sessionType === 'break'
                       ? 'bg-green-600 text-white'
                       : 'bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'
                   }`}
                   disabled={isRunning}
                 >
-                  <Coffee className="w-4 h-4 inline mr-2" />
+                  <Coffee className="w-3 h-3 sm:w-4 sm:h-4 inline mr-1 sm:mr-2" />
                   Break ({breakDuration} min)
                 </button>
                 <button
                   onClick={() => setShowSettings(!showSettings)}
-                  className="px-4 py-3 rounded-lg text-sm font-medium bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 transition-colors"
+                  className="px-3 sm:px-4 py-2 sm:py-3 rounded-lg text-xs sm:text-sm font-medium bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 transition-colors"
                   disabled={isRunning}
                 >
-                  <Settings className="w-4 h-4" />
+                  <Settings className="w-3 h-3 sm:w-4 sm:h-4" />
                 </button>
               </div>
 
               {/* Duration Settings */}
               {showSettings && !isRunning && (
-                <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 mb-4">
+                <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-3 sm:p-4 mb-4">
                   <h3 className="text-sm font-medium text-gray-900 dark:text-white mb-3">
                     Timer Settings
                   </h3>
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                     <div>
                       <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
                         Focus Duration (minutes)
@@ -226,7 +226,7 @@ export const FocusPage: React.FC = () => {
                   <div className="mt-3 flex justify-center">
                     <button
                       onClick={() => setShowSettings(false)}
-                      className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 text-sm"
+                      className="px-3 sm:px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 text-xs sm:text-sm"
                     >
                       Save Settings
                     </button>
@@ -242,34 +242,35 @@ export const FocusPage: React.FC = () => {
               sessionType={sessionType}
             />
 
-            <div className="mt-8 flex justify-center space-x-4">
+            <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row justify-center space-y-2 sm:space-y-0 sm:space-x-4">
               {!activeSession ? (
                 <button
                   onClick={startSession}
                   disabled={isLoading}
-                  className="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  className="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 border border-transparent text-sm sm:text-lg font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                 >
                   {isLoading ? (
                     <LoadingSpinner size="small" className="mr-2 text-white" />
                   ) : (
-                    <Play className="w-6 h-6 mr-2" />
+                    <Play className="w-4 h-4 sm:w-6 sm:h-6 mr-2" />
                   )}
-                  Start {sessionType} ({getCurrentDuration()} min)
+                  <span className="hidden sm:inline">Start {sessionType} ({getCurrentDuration()} min)</span>
+                  <span className="sm:hidden">Start ({getCurrentDuration()}m)</span>
                 </button>
               ) : (
                 <>
                   <button
                     onClick={isRunning ? pauseSession : resumeSession}
-                    className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
+                    className="inline-flex items-center justify-center px-4 sm:px-6 py-2 sm:py-3 border border-transparent text-sm sm:text-base font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
                   >
                     {isRunning ? (
                       <>
-                        <Pause className="w-5 h-5 mr-2" />
+                        <Pause className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                         Pause
                       </>
                     ) : (
                       <>
-                        <Play className="w-5 h-5 mr-2" />
+                        <Play className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                         Resume
                       </>
                     )}
@@ -277,9 +278,9 @@ export const FocusPage: React.FC = () => {
                   
                   <button
                     onClick={resetSession}
-                    className="inline-flex items-center px-6 py-3 border border-gray-300 text-base font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white dark:border-gray-600 dark:hover:bg-gray-600 transition-colors"
+                    className="inline-flex items-center justify-center px-4 sm:px-6 py-2 sm:py-3 border border-gray-300 text-sm sm:text-base font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white dark:border-gray-600 dark:hover:bg-gray-600 transition-colors"
                   >
-                    <RotateCcw className="w-5 h-5 mr-2" />
+                    <RotateCcw className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                     Reset
                   </button>
                 </>
@@ -288,32 +289,32 @@ export const FocusPage: React.FC = () => {
 
             {/* Quick Duration Presets */}
             {!isRunning && !activeSession && (
-              <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+              <div className="mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-gray-200 dark:border-gray-700">
                 <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">Quick Presets:</p>
-                <div className="flex justify-center space-x-2">
+                <div className="flex flex-wrap justify-center gap-2">
                   {sessionType === 'focus' ? (
                     <>
                       <button
                         onClick={() => setFocusDuration(15)}
-                        className="px-3 py-1 text-xs bg-blue-100 text-blue-800 rounded-full hover:bg-blue-200 dark:bg-blue-900 dark:text-blue-300 dark:hover:bg-blue-800"
+                        className="px-2 sm:px-3 py-1 text-xs bg-blue-100 text-blue-800 rounded-full hover:bg-blue-200 dark:bg-blue-900 dark:text-blue-300 dark:hover:bg-blue-800"
                       >
                         15 min
                       </button>
                       <button
                         onClick={() => setFocusDuration(25)}
-                        className="px-3 py-1 text-xs bg-blue-100 text-blue-800 rounded-full hover:bg-blue-200 dark:bg-blue-900 dark:text-blue-300 dark:hover:bg-blue-800"
+                        className="px-2 sm:px-3 py-1 text-xs bg-blue-100 text-blue-800 rounded-full hover:bg-blue-200 dark:bg-blue-900 dark:text-blue-300 dark:hover:bg-blue-800"
                       >
                         25 min
                       </button>
                       <button
                         onClick={() => setFocusDuration(45)}
-                        className="px-3 py-1 text-xs bg-blue-100 text-blue-800 rounded-full hover:bg-blue-200 dark:bg-blue-900 dark:text-blue-300 dark:hover:bg-blue-800"
+                        className="px-2 sm:px-3 py-1 text-xs bg-blue-100 text-blue-800 rounded-full hover:bg-blue-200 dark:bg-blue-900 dark:text-blue-300 dark:hover:bg-blue-800"
                       >
                         45 min
                       </button>
                       <button
                         onClick={() => setFocusDuration(60)}
-                        className="px-3 py-1 text-xs bg-blue-100 text-blue-800 rounded-full hover:bg-blue-200 dark:bg-blue-900 dark:text-blue-300 dark:hover:bg-blue-800"
+                        className="px-2 sm:px-3 py-1 text-xs bg-blue-100 text-blue-800 rounded-full hover:bg-blue-200 dark:bg-blue-900 dark:text-blue-300 dark:hover:bg-blue-800"
                       >
                         60 min
                       </button>
@@ -322,25 +323,25 @@ export const FocusPage: React.FC = () => {
                     <>
                       <button
                         onClick={() => setBreakDuration(5)}
-                        className="px-3 py-1 text-xs bg-green-100 text-green-800 rounded-full hover:bg-green-200 dark:bg-green-900 dark:text-green-300 dark:hover:bg-green-800"
+                        className="px-2 sm:px-3 py-1 text-xs bg-green-100 text-green-800 rounded-full hover:bg-green-200 dark:bg-green-900 dark:text-green-300 dark:hover:bg-green-800"
                       >
                         5 min
                       </button>
                       <button
                         onClick={() => setBreakDuration(10)}
-                        className="px-3 py-1 text-xs bg-green-100 text-green-800 rounded-full hover:bg-green-200 dark:bg-green-900 dark:text-green-300 dark:hover:bg-green-800"
+                        className="px-2 sm:px-3 py-1 text-xs bg-green-100 text-green-800 rounded-full hover:bg-green-200 dark:bg-green-900 dark:text-green-300 dark:hover:bg-green-800"
                       >
                         10 min
                       </button>
                       <button
                         onClick={() => setBreakDuration(15)}
-                        className="px-3 py-1 text-xs bg-green-100 text-green-800 rounded-full hover:bg-green-200 dark:bg-green-900 dark:text-green-300 dark:hover:bg-green-800"
+                        className="px-2 sm:px-3 py-1 text-xs bg-green-100 text-green-800 rounded-full hover:bg-green-200 dark:bg-green-900 dark:text-green-300 dark:hover:bg-green-800"
                       >
                         15 min
                       </button>
                       <button
                         onClick={() => setBreakDuration(30)}
-                        className="px-3 py-1 text-xs bg-green-100 text-green-800 rounded-full hover:bg-green-200 dark:bg-green-900 dark:text-green-300 dark:hover:bg-green-800"
+                        className="px-2 sm:px-3 py-1 text-xs bg-green-100 text-green-800 rounded-full hover:bg-green-200 dark:bg-green-900 dark:text-green-300 dark:hover:bg-green-800"
                       >
                         30 min
                       </button>

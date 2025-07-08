@@ -83,17 +83,17 @@ export const Dashboard: React.FC = () => {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+        <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white">
           Dashboard
         </h1>
-        <div className="flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400">
+        <div className="hidden md:flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400">
           <Calendar className="w-4 h-4" />
           <span>{new Date().toLocaleDateString()}</span>
         </div>
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4 lg:gap-6">
         <StatsCard
           title="Tasks"
           value={stats.tasks.completed}
@@ -129,51 +129,51 @@ export const Dashboard: React.FC = () => {
       </div>
 
       {/* Quick Stats */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6">
+        <div className="bg-white dark:bg-gray-800 rounded-xl p-4 sm:p-6 shadow-sm">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+              <p className="text-xs sm:text-sm font-medium text-gray-600 dark:text-gray-400">
                 Total Focus Time
               </p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-white">
+              <p className="text-lg sm:text-2xl font-bold text-gray-900 dark:text-white">
                 {Math.round(stats.focus.totalTime / 60)}h {stats.focus.totalTime % 60}m
               </p>
             </div>
-            <div className="p-3 bg-purple-100 dark:bg-purple-900 rounded-lg">
-              <TrendingUp className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+            <div className="p-2 sm:p-3 bg-purple-100 dark:bg-purple-900 rounded-lg">
+              <TrendingUp className="w-5 h-5 sm:w-6 sm:h-6 text-purple-600 dark:text-purple-400" />
             </div>
           </div>
         </div>
         
-        <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
+        <div className="bg-white dark:bg-gray-800 rounded-xl p-4 sm:p-6 shadow-sm">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+              <p className="text-xs sm:text-sm font-medium text-gray-600 dark:text-gray-400">
                 Overdue Tasks
               </p>
-              <p className="text-2xl font-bold text-red-600 dark:text-red-400">
+              <p className="text-lg sm:text-2xl font-bold text-red-600 dark:text-red-400">
                 {stats.tasks.overdue}
               </p>
             </div>
-            <div className="p-3 bg-red-100 dark:bg-red-900 rounded-lg">
-              <Calendar className="w-6 h-6 text-red-600 dark:text-red-400" />
+            <div className="p-2 sm:p-3 bg-red-100 dark:bg-red-900 rounded-lg">
+              <Calendar className="w-5 h-5 sm:w-6 sm:h-6 text-red-600 dark:text-red-400" />
             </div>
           </div>
         </div>
         
-        <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
+        <div className="bg-white dark:bg-gray-800 rounded-xl p-4 sm:p-6 shadow-sm">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+              <p className="text-xs sm:text-sm font-medium text-gray-600 dark:text-gray-400">
                 Best Streak
               </p>
-              <p className="text-2xl font-bold text-yellow-600 dark:text-yellow-400">
+              <p className="text-lg sm:text-2xl font-bold text-yellow-600 dark:text-yellow-400">
                 {Math.round(stats.habits.avgBestStreak)} days
               </p>
             </div>
-            <div className="p-3 bg-yellow-100 dark:bg-yellow-900 rounded-lg">
-              <Award className="w-6 h-6 text-yellow-600 dark:text-yellow-400" />
+            <div className="p-2 sm:p-3 bg-yellow-100 dark:bg-yellow-900 rounded-lg">
+              <Award className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-600 dark:text-yellow-400" />
             </div>
           </div>
         </div>
@@ -181,11 +181,13 @@ export const Dashboard: React.FC = () => {
 
       {/* Activity Chart */}
       {analytics && (
-        <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+        <div className="bg-white dark:bg-gray-800 rounded-xl p-3 sm:p-4 lg:p-6 shadow-sm">
+          <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-gray-900 dark:text-white mb-3 sm:mb-4">
             Weekly Activity
           </h3>
-          <ActivityChart data={analytics} />
+          <div className="h-48 sm:h-64 lg:h-80">
+            <ActivityChart data={analytics} />
+          </div>
         </div>
       )}
     </div>
