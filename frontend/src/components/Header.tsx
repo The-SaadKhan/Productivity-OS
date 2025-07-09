@@ -1,7 +1,26 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { useTheme } from '../contexts/ThemeContext';
-import { Sun, Moon, LogOut, User } from 'lucide-react';
+import { 
+  Sun, 
+  Moon, 
+  LogOut, 
+  User,
+  LayoutDashboard, 
+  CheckSquare, 
+  Target, 
+  Clock, 
+  StickyNote
+} from 'lucide-react';
+
+const navItems = [
+  { path: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
+  { path: '/tasks', icon: CheckSquare, label: 'Tasks' },
+  { path: '/habits', icon: Target, label: 'Habits' },
+  { path: '/focus', icon: Clock, label: 'Focus' },
+  { path: '/notes', icon: StickyNote, label: 'Notes' },
+];
 
 export const Header: React.FC = () => {
   const { user, logout } = useAuth();
@@ -11,12 +30,44 @@ export const Header: React.FC = () => {
     <header className="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
       <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 py-2 sm:py-3 lg:py-4">
         <div className="flex items-center justify-between">
+          {/* Left side - Logo (desktop) or Welcome message (mobile) */}
           <div className="flex items-center space-x-2 sm:space-x-4 min-w-0">
-            <h2 className="text-sm sm:text-lg lg:text-xl font-semibold text-gray-800 dark:text-white truncate">
-              Welcome back, {user?.name}!
-            </h2>
+            {/* Desktop Logo */}
+            <div className="hidden lg:block">
+              <h1 className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                ✨ Productivity OS
+              </h1>
+            </div>
+            
+            {/* Mobile Welcome Message */}
+            <div className="lg:hidden">
+              <h2 className="text-sm sm:text-lg font-semibold text-gray-800 dark:text-white truncate">
+                Welcome back, {user?.name}!
+              </h2>
+            </div>
           </div>
           
+          {/* Center - Navigation (desktop only) */}
+          <div className="hidden lg:flex items-center space-x-1">
+            {navItems.map((item) => (
+              <NavLink
+                key={item.path}
+                to={item.path}
+                className={({ isActive }) =>
+                  `flex items-center px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
+                    isActive
+                      ? 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300'
+                      : 'text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700'
+                  }`
+                }
+              >
+                <item.icon className="w-4 h-4 mr-2" />
+                {item.label}
+              </NavLink>
+            ))}
+          </div>
+          
+          {/* Right side - User controls */}
           <div className="flex items-center space-x-1 sm:space-x-2 lg:space-x-4 flex-shrink-0">
             <button
               onClick={toggleTheme}

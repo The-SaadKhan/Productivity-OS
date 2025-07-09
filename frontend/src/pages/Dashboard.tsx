@@ -71,7 +71,7 @@ export const Dashboard: React.FC = () => {
       </div>
     );
   }
-
+  
   const completionRate = stats.tasks.total > 0 
     ? Math.round((stats.tasks.completed / stats.tasks.total) * 100)
     : 0;
