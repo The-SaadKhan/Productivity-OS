@@ -95,5 +95,8 @@ npm run dev
 
 - Scalable deployment pipelines
 
-## 🔗 Live site:
-👉 https://productivity-os.vercel.app/
+## 🌐 Live Demo
+
+🚀 Check out the deployed project here: [Productivity-OS Live](https://productivity-os.vercel.app/)
+
+---
