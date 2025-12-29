@@ -25,12 +25,14 @@ app.use(helmet());
 // ✅ CORS: allow frontend dev and prod
 const allowedOrigins = [
   'http://localhost:5173',
+  'http://localhost:5174',
+  'http://localhost:5175',
   'https://productivity-os.vercel.app',
   process.env.CLIENT_URL,
 ].filter(Boolean); // removes undefined
 
 app.use(
-  3({
+  cors({
     origin: function (origin, callback) {
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
